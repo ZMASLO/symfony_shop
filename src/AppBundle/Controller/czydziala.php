@@ -24,7 +24,10 @@ class czydziala extends Controller
             'Ta strona ma potencjał',
             'Ta strona będzie działać'
         ];
-
+    if($imie=='products'){
+        return $this->render('wyglad/products.html.twig');
+    }
+    else
         return $this->render('wyglad/homepage.html.twig', [
 
             'name' => $imie,

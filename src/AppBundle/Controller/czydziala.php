@@ -27,6 +27,9 @@ class czydziala extends Controller
     if($imie=='products'){
         return $this->render('wyglad/products.html.twig');
     }
+    if($imie=='register'){
+            return $this->render('wyglad/register.html.twig');
+        }
     else
         return $this->render('wyglad/homepage.html.twig', [
 

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gość specjalny: {{ name }} {% endblock %}
+
+
+{% block body %}
+<h1>Witam Cię bardzo serdecznie {{ name }}</h1>
+
+
+    {% for note in notes %}
+    {{  note  }}
+        <br>
+    {% endfor %}
+{% endblock %}

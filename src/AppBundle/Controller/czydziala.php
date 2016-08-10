@@ -12,19 +12,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class czydziala extends Controllerr
+class czydziala extends Controller
 {
     /**
      * @Route("/{imie}")
      */
     public function showAction($imie){
-        $templating = $this->container->get('templating');
-        $html = $templating->render('wyglad/homepage.html.twig', [
 
-            'name' => $imie
-        ])
+        $notes = [
+            'Ta strona nie jest zaawansowana',
+            'Ta strona ma potencjał',
+            'Ta strona będzie działać'
+        ];
 
+        return $this->render('wyglad/homepage.html.twig', [
 
-        return new Response($html);
+            'name' => $imie,
+            'notes' => $notes
+        ]);
+
     }
 }

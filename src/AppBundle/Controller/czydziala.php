@@ -8,12 +8,29 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AddUser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class czydziala extends Controller
 {
+    /**
+     * @Route("/register/new")
+     */
+    public function RegisterNew(){
+        $user = new AddUser();
+        $user->setName('zmaslo');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return new Response('<html><body>Wpis dodany</body></html>');
+
+    }
+
+
     /**
      * @Route("/{imie}")
      */
@@ -29,7 +46,10 @@ class czydziala extends Controller
     }
     if($imie=='register'){
             return $this->render('wyglad/register.html.twig');
-        }
+    }
+    if($imie=='login'){
+            return $this->render('wyglad/login.html.twig');
+    }
     else
         return $this->render('wyglad/homepage.html.twig', [
 

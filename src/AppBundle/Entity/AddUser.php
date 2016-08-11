@@ -27,6 +27,22 @@ class AddUser
      * @ORM\Column(type="string")
      */
     private $name;
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
     /**
      * @ORM\Column(type="string")
      */
@@ -39,4 +55,8 @@ class AddUser
      * @ORM\Column(type="string")
      */
     private $address;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $lvl;
 }

@@ -20,7 +20,7 @@ class czydziala extends Controller
      */
     public function RegisterNew(){
         $user = new AddUser();
-        $user->setName('zmaslo');
+        $user->setName($_POST['user']);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
@@ -32,30 +32,24 @@ class czydziala extends Controller
 
 
     /**
-     * @Route("/{imie}")
+     * @Route("/products")
      */
-    public function showAction($imie){
-
-        $notes = [
-            'Ta strona nie jest zaawansowana',
-            'Ta strona ma potencjał',
-            'Ta strona będzie działać'
-        ];
-    if($imie=='products'){
+    public function products(){
         return $this->render('wyglad/products.html.twig');
     }
-    if($imie=='register'){
-            return $this->render('wyglad/register.html.twig');
+    /**
+     * @Route("/register")
+     */
+    public function register(){
+        return $this->render('wyglad/register.html.twig');
     }
-    if($imie=='login'){
-            return $this->render('wyglad/login.html.twig');
+    /**
+     * @Route("/login")
+     */
+    public function login(){
+        return $this->render('wyglad/login.html.twig');
     }
-    else
-        return $this->render('wyglad/homepage.html.twig', [
 
-            'name' => $imie,
-            'notes' => $notes
-        ]);
 
-    }
+
 }

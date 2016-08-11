@@ -8,8 +8,14 @@
 
 namespace AppBundle\Controller;
 
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 class test
 {
-
+    public function test(){
+        /**
+         * @Route("/test")
+         */
+        return new Response('elo hg cukiereczku');
+    }
 }

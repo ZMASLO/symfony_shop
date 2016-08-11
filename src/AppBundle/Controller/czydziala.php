@@ -20,7 +20,11 @@ class czydziala extends Controller
      */
     public function RegisterNew(){
         $user = new AddUser();
-        $user->setName($_POST['user']);
+        $user->setUser('zmaslo');
+        $user->setPassword('zmaslo3379');
+        $user->setEmail('sylwaker@gmail.com');
+        $user->setAddress('Żwirki i Wigury 4');
+        $user->setLvl(1);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);

@@ -26,12 +26,12 @@ class AddUser
     /**
      * @ORM\Column(type="string")
      */
-    private $name;
+    private $user;
 
     /**
      * @return mixed
      */
-    public function getName()
+    public function getUser()
     {
         return $this->name;
     }
@@ -39,14 +39,78 @@ class AddUser
     /**
      * @param mixed $name
      */
-    public function setName($name)
+    public function setUser($user)
     {
-        $this->name = $name;
+        $this->user = $user;
     }
     /**
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * @param mixed $lvl
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
+    }
     /**
      * @ORM\Column(type="string")
      */

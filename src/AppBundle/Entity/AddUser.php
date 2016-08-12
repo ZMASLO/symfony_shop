@@ -33,7 +33,7 @@ class AddUser
      */
     public function getUser()
     {
-        return $this->name;
+        return $this->user;
     }
 
     /**

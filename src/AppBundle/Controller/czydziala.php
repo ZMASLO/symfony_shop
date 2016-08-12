@@ -11,7 +11,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\AddUser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class czydziala extends Controller
@@ -21,8 +25,8 @@ class czydziala extends Controller
      */
     public function RegisterNew(){
         $user = new AddUser();
-        $user->setUser($_GET["user"]);
-        $user->setPassword($_GET["password"]);
+        $user->setUser('stefan');
+        $user->setPassword('mleko');
         $user->setEmail('sylwaker@gmail.com');
         $user->setAddress('Żwirki i Wigury 4');
         $user->setLvl(1);
@@ -31,7 +35,7 @@ class czydziala extends Controller
         $em->persist($user);
         $em->flush();
 
-        return new Response('<html><body>Wpis dodany</body></html>');
+        return new Response('form.html.twig');
 
     }
 
@@ -45,17 +49,31 @@ class czydziala extends Controller
     /**
      * @Route("/register")
      */
-    public function register(){
+    public function register(Request $request){
 
-        $form = $this->createFormBuilder($user)
-            ->add('user', TextType::class)
-            ->add('email', TextType::class)
-            ->add('password', TextType::class)
-            ->getForm();
+        $form = $this->createFormBuilder()
+            ->add('user', TextType::class, [
+                'label' => 'Użytkownik'])
+            ->add('email', EmailType::class)
+            ->add('password', PasswordType::class, [
+                'label' => 'Hasło'
+            ])
+            ->add('address', TextType::class, [
+                'label' => 'Adres'
+            ])
+            ->add('zarejestruj', SubmitType::class)
+            ->getForm()
+        ;
 
-        return $this->render('wyglad/register.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            dump($form->getData());
+        }
+
+        return $this->render('wyglad/register.html.twig', [
+            'myForm' => $form->createView()
+        ]);
     }
     /**
      * @Route("/login")

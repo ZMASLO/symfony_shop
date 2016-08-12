@@ -69,6 +69,9 @@ class czydziala extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
             dump($form->getData());
+
+
+
         }
 
         return $this->render('wyglad/register.html.twig', [

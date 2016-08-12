@@ -21,26 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 class czydziala extends Controller
 {
     /**
-     * @Route("/register/new")
-     */
-    public function RegisterNew(){
-        $user = new AddUser();
-        $user->setUser('stefan');
-        $user->setPassword('mleko');
-        $user->setEmail('sylwaker@gmail.com');
-        $user->setAddress('Żwirki i Wigury 4');
-        $user->setLvl(1);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
-
-        return new Response('form.html.twig');
-
-    }
-
-
-    /**
      * @Route("/products")
      */
     public function products(){
@@ -68,8 +48,17 @@ class czydziala extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            dump($form->getData());
+            //dump($form->getData());
+            $user = new AddUser();
+            $user->setUser($form->getData()['user']);
+            $user->setPassword($form->getData()['password']);
+            $user->setEmail($form->getData()['email']);
+            $user->setAddress($form->getData()['address']);
+            $user->setLvl(1);
 
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
 
         }

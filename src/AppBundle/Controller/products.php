@@ -2,24 +2,24 @@
 /**
  * Created by PhpStorm.
  * User: Sylwa
- * Date: 10.08.2016
- * Time: 10:45
+ * Date: 12.08.2016
+ * Time: 12:57
  */
 
 namespace AppBundle\Controller;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class startowa extends Controller
+
+
+
+class products extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/products")
      */
-    public function startpage(){
-
-        return $this->render('wyglad/startpage.html.twig');
-
+    public function products(){
+        return $this->render('wyglad/products.html.twig');
     }
 }

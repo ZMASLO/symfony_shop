@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Sylwa
- * Date: 10.08.2016
- * Time: 10:45
+ * Date: 12.08.2016
+ * Time: 11:25
  */
 
 namespace AppBundle\Controller;
@@ -18,51 +18,48 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class czydziala extends Controller
+
+class register extends Controller
 {
     /**
-     * @Route("/products")
+     * @param Request $request
+     * @Route("/register")
      */
-    public function products(){
-        return $this->render('wyglad/products.html.twig');
-    }
-    /*
     public function register(Request $request){
         $user = new AddUser();
         $form = $this->createFormBuilder($user)
             ->add('user', TextType::class, [
-                'label' => 'Użytkownik'])
-            ->add('email', EmailType::class)
+                'label' => 'Użytkownik'
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'E-Mail'
+            ])
             ->add('password', PasswordType::class, [
                 'label' => 'Hasło'
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adres'
             ])
-            ->add('zarejestruj', SubmitType::class)
-
+            ->add('submit', SubmitType::class, [
+                'label' => 'Zarejestruj'
+            ])
             ->getForm()
         ;
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            //dump($form->getData());
-
+            //jeśli formularz jest zatwierdzony i hasła się zgadzają
             $user->setLvl(1);
+
+            //wysyłam do bazy danych
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
             return $this->redirect('/test/web/app_dev.php');
         }
-
         return $this->render('wyglad/register.html.twig', [
             'myForm' => $form->createView()
         ]);
     }
-*/
-
-
-
 }

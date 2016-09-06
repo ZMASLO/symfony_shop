@@ -23,7 +23,7 @@ class register extends Controller
 {
     /**
      * @param Request $request
-     * @Route("/register")
+     * @Route("/register", name="register")
      */
     public function register(Request $request){
         $user = new AddUser();
@@ -56,7 +56,7 @@ class register extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirect('/test/web/app_dev.php');
+            return $this->redirectToRoute('startpage');
         }
         return $this->render('wyglad/register.html.twig', [
             'myForm' => $form->createView()

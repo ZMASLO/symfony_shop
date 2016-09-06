@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 class products extends Controller
 {
     /**
-     * @Route("/products")
+     * @Route("/products", name="products")
      */
     public function products(){
         return $this->render('wyglad/products.html.twig');

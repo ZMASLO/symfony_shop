@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class startowa extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="startpage")
      */
     public function startpage(){
 

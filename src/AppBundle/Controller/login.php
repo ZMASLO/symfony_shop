@@ -14,16 +14,15 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class login extends Controller
 {
     /**
      * @Route("/login")
      */
-    public function login(){
-        $repository = $this -> getDoctrine()->getRepository('AppBundle:AddUser');
-        $user = $repository->find(1);
-        dump($user);
+    public function login(Request $request){
 
         $form = $this->createFormBuilder()
             ->add('user', TextType::class, [
@@ -37,6 +36,18 @@ class login extends Controller
             ])
             ->getForm()
         ;
+
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+            $repository = $this -> getDoctrine()->getRepository('AppBundle:AddUser');
+            $user = $repository->findOneByUser($form->get('user')->getData());
+            dump($user);
+            $zalogowany = 0;
+            //if($user('password')==$form->get('password')->getData()) $zalogowany = 1;
+        }
+
+
 
         return $this->render('wyglad/login.html.twig',[
             'myForm' => $form->createView()

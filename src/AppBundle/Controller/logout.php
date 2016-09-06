@@ -8,8 +8,20 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class logout
+class logout extends Controller
 {
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){
+        $session = new Session();
+        $session->clear();
+        return $this->redirectToRoute('startpage');
+    }
 
 }

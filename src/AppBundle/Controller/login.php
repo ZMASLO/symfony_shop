@@ -54,7 +54,7 @@ class login extends Controller
                 $session->set('lvl', $user->getLvl());
                 //$_SESSION['lvl'] = $user->getLvl();
                 dump($session);
-                //return $this->redirectToRoute('startpage');
+                return $this->redirectToRoute('startpage');
             }
             else{
                 $wrongpass = 'Zły użytkownik lub hasło';

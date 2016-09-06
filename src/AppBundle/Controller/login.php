@@ -42,9 +42,11 @@ class login extends Controller
         if($form->isValid()){
             $repository = $this -> getDoctrine()->getRepository('AppBundle:AddUser');
             $user = $repository->findOneByUser($form->get('user')->getData());
-            dump($user);
+            dump($user->getPassword());
             $zalogowany = 0;
-            //if($user('password')==$form->get('password')->getData()) $zalogowany = 1;
+            if($user->getPassword()==$form->get('password')->getData()) $zalogowany = 1;
+            dump($zalogowany);
+
         }
 
 

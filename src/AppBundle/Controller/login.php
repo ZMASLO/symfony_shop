@@ -19,8 +19,12 @@ class login extends Controller
      */
     public function login(){
         $repository = $this -> getDoctrine()->getRepository('AppBundle:AddUser');
-        $czlowiek = $repository->find(1);
+        $user = $repository->findAll();
 
-        return $this->render('wyglad/login.html.twig');
+        dump($user);
+
+        return $this->render('wyglad/login.html.twig',[
+            'user' => $user
+        ]);
     }
 }

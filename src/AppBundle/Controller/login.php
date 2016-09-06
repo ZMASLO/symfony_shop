@@ -23,7 +23,7 @@ class login extends Controller
      * @Route("/login")
      */
     public function login(Request $request){
-
+        $wrongpass = '';
         $form = $this->createFormBuilder()
             ->add('user', TextType::class, [
                 'label' => 'Użytkownik'
@@ -44,15 +44,27 @@ class login extends Controller
             $user = $repository->findOneByUser($form->get('user')->getData());
             dump($user->getPassword());
             $zalogowany = 0;
-            if($user->getPassword()==$form->get('password')->getData()) $zalogowany = 1;
+            if($user->getPassword()==$form->get('password')->getData()){
+                $_SESSION['loged'] = 1;
+                $_SESSION['user'] = $user->getUser();
+                $_SESSION['lvl'] = $user->getLvl();
+                dump($_SESSION);
+                //return $this->redirectToRoute('startpage');
+            }
+            else{
+                $wrongpass = 'Zły użytkownik lub hasło';
+            }
             dump($zalogowany);
 
         }
 
 
 
+
+
         return $this->render('wyglad/login.html.twig',[
-            'myForm' => $form->createView()
+            'myForm' => $form->createView(),
+            'wrongpass' => $wrongpass
         ]);
     }
 }

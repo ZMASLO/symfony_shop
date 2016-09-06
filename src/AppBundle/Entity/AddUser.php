@@ -45,6 +45,10 @@ class AddUser
      * @ORM\Column(type="integer")
      */
     private $lvl;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $number;
 
     
 
@@ -176,5 +180,29 @@ class AddUser
     public function getLvl()
     {
         return $this->lvl;
+    }
+
+    /**
+     * Set number
+     *
+     * @param integer $number
+     *
+     * @return AddUser
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return integer
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 }

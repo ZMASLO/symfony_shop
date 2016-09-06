@@ -40,6 +40,9 @@ class register extends Controller
             ->add('address', TextType::class, [
                 'label' => 'Adres'
             ])
+            ->add('number', TextType::class, [
+                'label' => 'Numer telefonu'
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Zarejestruj'
             ])

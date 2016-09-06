@@ -47,7 +47,6 @@ class login extends Controller
             $zalogowany = 0;
             if($user->getPassword()==$form->get('password')->getData()){
                 $session = new Session();
-                $session->start();
                 $session->set('loged', 1);
                 //$_SESSION['loged'] = 1;
                 $session->set('user', $user->getUser());

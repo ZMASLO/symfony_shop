@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class login extends Controller
@@ -45,10 +46,15 @@ class login extends Controller
             dump($user->getPassword());
             $zalogowany = 0;
             if($user->getPassword()==$form->get('password')->getData()){
-                $_SESSION['loged'] = 1;
-                $_SESSION['user'] = $user->getUser();
-                $_SESSION['lvl'] = $user->getLvl();
-                dump($_SESSION);
+                $session = new Session();
+                $session->start();
+                $session->set('loged', 1);
+                //$_SESSION['loged'] = 1;
+                $session->set('user', $user->getUser());
+                //$_SESSION['user'] = $user->getUser();
+                $session->set('lvl', $user->getLvl());
+                //$_SESSION['lvl'] = $user->getLvl();
+                dump($session);
                 //return $this->redirectToRoute('startpage');
             }
             else{

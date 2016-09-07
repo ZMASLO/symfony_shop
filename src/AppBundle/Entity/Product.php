@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -38,4 +39,21 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $old_price;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $recomended;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Proszę przesłać plik w formacie *.jpg")
+     * @Assert\File(mimeTypes={ "application/jpg" })
+     */
+     private $photo;
 }

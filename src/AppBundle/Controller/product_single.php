@@ -18,7 +18,16 @@ class product_single extends Controller
      * @Route("/products/{id}")
      */
     public function showProduct($id){
-        return $this->render('');
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Product');
+        $product = $repository->find($id);
+
+        return $this->render('wyglad/product_single.html.twig', [
+            'id' => $id,
+            'title' => $product->getTitle(),
+            'description' => $product->getDescription(),
+            'price' => $product->getPrice()
+        ]);
     }
 
 

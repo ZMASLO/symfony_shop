@@ -18,7 +18,7 @@
             {% if app.session.get('lvl')>99 %}
                 <button type="button" class="btn btn-warning col-md-12 col-xs-12">Edytuj Produkt</button>
                 <div class="col-md-12 col-xs-12"></div>
-                <button type="button" class="btn btn-danger col-md-12 col-xs-12">Usuń Produkt</button>
+                <a href="{{ path('product_delete', {'id': id}) }}"><button type="button" class="btn btn-danger col-md-12 col-xs-12">Usuń Produkt</button></a>
             {% endif %}
         </div>
     </div>

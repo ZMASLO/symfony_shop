@@ -7,7 +7,12 @@
         <div class="col-md-3"></div>
         <img src="{{ asset('uploads/photos/') }}{{ id }}.jpg" class="col-md-6 col-xs-12 img-rounded"></img>
         <div class="col-md-3 col-xs-12">
+            {% if old_price > 0 %}
+                <h4 class="text-center"><s>Stara Cena: {{ old_price }} zł</s></h4>
+                <h2 class="text-center">Nowa Cena: {{ price }} zł</h2>
+            {% else %}
             <h2 class="text-center">Cena: {{ price }} zł</h2>
+            {% endif %}
             <button type="button" class="btn btn-success col-md-12 col-xs-12">Dodaj do koszyka</button>
             <div class="col-md-12 col-xs-12"></div>
             {% if app.session.get('lvl')>99 %}

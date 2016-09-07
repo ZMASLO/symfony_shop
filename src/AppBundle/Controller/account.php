@@ -25,10 +25,12 @@ class account extends Controller
             $user = $repository->findOneByUser($session->get('user'));
             $email = $user->getEmail();
             $address = $user->getAddress();
+            $number = $user->getNumber();
 
             return $this->render(':wyglad:account.html.twig', [
                 'email' => $email,
-                'address' => $address
+                'address' => $address,
+                'number' => $number
             ]);
         }
 

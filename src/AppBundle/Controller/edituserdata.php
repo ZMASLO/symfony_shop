@@ -24,11 +24,12 @@ class edituserdata extends Controller
         $session = new Session();
         $repository = $this->getDoctrine()->getRepository('AppBundle:AddUser');
         $user = $repository->findOneByUser($session->get('user'));
+        //pobieram dane z bazy aby wpisać je automatycznie w formularz
         $pass = $user->getPassword();
         $email = $user->getEmail();
         $address = $user->getAddress();
         $number = $user->getNumber();
-        dump($user);
+        //dump($user);
 
 
         $form = $this->createFormBuilder()
@@ -55,6 +56,16 @@ class edituserdata extends Controller
         ;
 
         $form->handleRequest($request);
+        //jeśli jest poprawny to wysyłam zmianę do bazy
+        if($form->isValid()){
+            $user->setPassword($form->get('password')->getData());
+            $user->setEmail($form->get('email')->getData());
+            $user->setAddress($form->get('address')->getData());
+            $user->setNumber($form->get('number')->getData());
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('account');
+        }
 
 
         return $this->render('wyglad/edituserdata.html.twig', [

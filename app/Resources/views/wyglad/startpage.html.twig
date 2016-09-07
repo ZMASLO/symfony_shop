@@ -1,5 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
- <center><h1>Polecane produkty:</h1></center>
+<div class="row text-center">
+ <h1>Polecane Produkty:</h1>
+</div>
+<div class="row">
+ {% for product in products %}
+  {% if product.recomended == 1 %}
+  <div class="col-md-4 text-center" style="height: 270px">
+   <a href="{{ path('products') }}/{{ product.id }}"> <img class="img-thumbnail" style="height: 200px" src="{{ asset('uploads/photos/') }}{{ product.id }}.jpg"></img>
+    <p class="text-center">{{ product.title }}</p></a>
+  </div>
+   {% endif %}
+ {% endfor %}
+</div>
 {% endblock %}

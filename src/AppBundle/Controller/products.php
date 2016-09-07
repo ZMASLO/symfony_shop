@@ -24,7 +24,6 @@ class products extends Controller
     public function products(){
         $repository = $this->getDoctrine()->getRepository('AppBundle:Product');
         $products = $repository->findAll();
-        dump($products);
         return $this->render('wyglad/products.html.twig', [
             'products' => $products
         ]);

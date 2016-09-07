@@ -5,7 +5,7 @@
 <h1><p class="text-center">{{ title }}</p></h1>
     <div class="row">
         <div class="col-md-3"></div>
-        <img src="{{ asset('uploads/photos/') }}{{ id }}.jpg" class="col-md-6 col-xs-12 img-rounded"></img>
+        <div class="text-center col-md-6 col-xs-12"><img style="height: 320px" src="{{ asset('uploads/photos/') }}{{ id }}.jpg"  class="img-rounded"></img></div>
         <div class="col-md-3 col-xs-12">
             {% if old_price > 0 %}
                 <h4 class="text-center"><s>Stara Cena: {{ old_price }} zł</s></h4>
@@ -23,9 +23,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3"></div>
-           <div class="col-md-6"><h3><p class=""> {{ description }} </p></h3></div>
-        <div class="col-md-3"></div>
+        <div class="col-md-1"></div>
+           <div class="col-md-10"><h3><p class=""> {{ description }} </p></h3></div>
+        <div class="col-md-1"></div>
     </div>
 
 

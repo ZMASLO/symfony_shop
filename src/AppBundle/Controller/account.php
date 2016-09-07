@@ -30,7 +30,8 @@ class account extends Controller
             return $this->render(':wyglad:account.html.twig', [
                 'email' => $email,
                 'address' => $address,
-                'number' => $number
+                'number' => $number,
+                'user' => $user
             ]);
         }
 

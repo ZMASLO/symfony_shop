@@ -19,7 +19,12 @@ class startowa extends Controller
      */
     public function startpage(){
 
-        return $this->render('wyglad/startpage.html.twig');
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Product');
+        $products = $repository->findAll();
+
+        return $this->render('wyglad/startpage.html.twig', [
+            'products' => $products
+        ]);
 
     }
 }

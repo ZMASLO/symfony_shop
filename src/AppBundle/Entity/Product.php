@@ -31,22 +31,22 @@ class Product
     private $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(length=4095)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $old_price = 0;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
     private $recomended;
 

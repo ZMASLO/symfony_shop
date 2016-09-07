@@ -7,6 +7,8 @@
  */
 
 namespace AppBundle\Controller;
+use AppBundle\AppBundle;
+use AppBundle\Entity\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +22,11 @@ class products extends Controller
      * @Route("/products", name="products")
      */
     public function products(){
-        return $this->render('wyglad/products.html.twig');
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Product');
+        $products = $repository->findAll();
+        dump($products);
+        return $this->render('wyglad/products.html.twig', [
+            'products' => $products
+        ]);
     }
 }

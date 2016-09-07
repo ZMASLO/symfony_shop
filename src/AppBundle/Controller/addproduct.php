@@ -60,6 +60,7 @@ class addproduct extends Controller
                 $photoname
             );
             $product->setPhoto($photoname);
+            return $this->redirect('products/'.$product->getPhoto());
         }
 
         return $this->render('wyglad/addproduct.html.twig', [

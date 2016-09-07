@@ -5,8 +5,17 @@
 <h1><p class="text-center">{{ title }}</p></h1>
     <div class="row">
         <div class="col-md-3"></div>
-        <img src="{{ asset('uploads/photos/') }}{{ id }}.jpg" class="col-md-6 img-responsive img-rounded"></img>
-        <div class="col-md-3"></div>
+        <img src="{{ asset('uploads/photos/') }}{{ id }}.jpg" class="col-md-6 col-xs-12 img-rounded"></img>
+        <div class="col-md-3 col-xs-12">
+            <h2 class="text-center">Cena: {{ price }} zł</h2>
+            <button type="button" class="btn btn-success col-md-12 col-xs-12">Dodaj do koszyka</button>
+            <div class="col-md-12 col-xs-12"></div>
+            {% if app.session.get('lvl')>99 %}
+                <button type="button" class="btn btn-warning col-md-12 col-xs-12">Edytuj Produkt</button>
+                <div class="col-md-12 col-xs-12"></div>
+                <button type="button" class="btn btn-danger col-md-12 col-xs-12">Usuń Produkt</button>
+            {% endif %}
+        </div>
     </div>
     <div class="row">
         <div class="col-md-3"></div>

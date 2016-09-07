@@ -26,7 +26,8 @@ class product_single extends Controller
             'id' => $id,
             'title' => $product->getTitle(),
             'description' => $product->getDescription(),
-            'price' => $product->getPrice()
+            'price' => $product->getPrice(),
+            'old_price' => $product->getOldPrice()
         ]);
     }
 

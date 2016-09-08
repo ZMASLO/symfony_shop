@@ -4,5 +4,10 @@
     {{ form_start(myForm) }}
     {{ form_widget(myForm) }}
     {{ form_end(myForm) }}
+    
+    <p class="text-center">Obecne zdjęcie wygląda ta:</p>
+    <div class="row text-center">
+        <img style="height: 200px" src="{{ asset('uploads/photos/') }}{{ id }}.jpg">
+    </div>
 
 {% endblock %}

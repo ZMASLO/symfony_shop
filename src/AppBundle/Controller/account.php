@@ -31,7 +31,8 @@ class account extends Controller
                 'email' => $email,
                 'address' => $address,
                 'number' => $number,
-                'user' => $user
+                'user' => $user,
+                'id' => $user->getId()
             ]);
         }
 

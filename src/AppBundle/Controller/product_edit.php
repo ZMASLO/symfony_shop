@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -50,8 +51,13 @@ class product_edit extends Controller
                 ],
                 'data' => $product->getRecomended()
             ])
+            ->add('photo', FileType::class, [
+                'label' => 'plik w formacie .jpg',
+                'required' => false,
+                'empty_data' => NULL
+            ])
             ->add('submit', SubmitType::class,[
-                'label' => 'Dodaj produkt'
+                'label' => 'Edytuj produkt'
             ])
 
         ->getForm();
@@ -63,13 +69,24 @@ class product_edit extends Controller
             $product->setPrice($form->get('price')->getData());
             $product->setOldPrice($form->get('old_price')->getData());
             $product->setRecomended($form->get('recomended')->getData());
+            $product->setPhoto($form->get('photo')->getData());
+            if($form->get('photo')->getData() != NULL){
+                $photo = $product->getPhoto();
+                $photoname = $product->getId().'.jpg';
+                $photo->move(
+                    $this->getParameter('photo_directory'),
+                    $photoname
+                );
+                $product->setPhoto($this->getParameter('photo_directory').'/'.$photoname);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $this->redirectToRoute('products');
         }
 
     return $this->render('wyglad/product_edit.html.twig', [
-       'myForm' => $form->createView()
+       'myForm' => $form->createView(),
+        'id' => $id
     ]);
     }
 

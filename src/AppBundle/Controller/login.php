@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class login extends Controller
 {
     /**
-     * @Route("/login")
+     * @Route("/login", name="login")
      */
     public function login(Request $request){
         $wrongpass = '';
@@ -42,7 +42,7 @@ class login extends Controller
 
         if($form->isValid()){
             $repository = $this -> getDoctrine()->getRepository('AppBundle:AddUser');
-            $user = $repository->findOneBy($form->get('user')->getData());
+            $user = $repository->findOneByUser($form->get('user')->getData());
             dump($user->getPassword());
             $zalogowany = 0;
             if($user->getPassword()==$form->get('password')->getData()){

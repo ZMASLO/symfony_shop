@@ -33,6 +33,11 @@
                         <td>{{ number }}</td>
                         <td><a href="/test/web/app_dev.php/edit_user_data">Zmień</a></td>
                     </tr>
+                    <tr>
+                        <td>Avatar</td>
+                        <td><img style="height: 100px" src="{{ asset('uploads/avatars/') }}{{ app.session.get('user') }}.jpg" </td>
+                        <td><a href="/test/web/app_dev.php/edit_user_data">Zmień</a></td>
+                    </tr>
                     {% if app.session.get('lvl') > 99 %}
                         <tr>
                             <td></td>

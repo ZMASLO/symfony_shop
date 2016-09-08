@@ -13,7 +13,12 @@
             {% else %}
             <h2 class="text-center">Cena: {{ price }} zł</h2>
             {% endif %}
+            {% if app.session.get('loged') == 0 %}
+                <a href="{{ path('login') }}"><button type="button" class="btn btn-success col-md-12 col-xs-12">Zaloguj się by kupić</button></a>
+            {% endif %}
+            {% if app.session.get('loged') == 1 %}
             <button type="button" class="btn btn-success col-md-12 col-xs-12">Dodaj do koszyka</button>
+            {% endif %}
             <div class="col-md-12 col-xs-12"></div>
             {% if app.session.get('lvl')>99 %}
                 <a href="{{ path('product_edit', {'id': id}) }}"><button type="button" class="btn btn-warning col-md-12 col-xs-12">Edytuj Produkt</button></a>

@@ -7,7 +7,7 @@
         <div class="col-md-3"></div>
         <div class="text-center col-md-6 col-xs-12"><img style="height: 320px" src="{{ asset('uploads/photos/') }}{{ id }}.jpg"  class="img-rounded"></img></div>
         <div class="col-md-3 col-xs-12">
-            {% if old_price > 0 %}
+            {% if old_price > price %}
                 <h4 class="text-center"><s>Stara Cena: {{ old_price }} zł</s></h4>
                 <h2 class="text-center">Nowa Cena: {{ price }} zł</h2>
             {% else %}
@@ -16,7 +16,7 @@
             <button type="button" class="btn btn-success col-md-12 col-xs-12">Dodaj do koszyka</button>
             <div class="col-md-12 col-xs-12"></div>
             {% if app.session.get('lvl')>99 %}
-                <button type="button" class="btn btn-warning col-md-12 col-xs-12">Edytuj Produkt</button>
+                <a href="{{ path('product_edit', {'id': id}) }}"><button type="button" class="btn btn-warning col-md-12 col-xs-12">Edytuj Produkt</button></a>
                 <div class="col-md-12 col-xs-12"></div>
                 <a href="{{ path('product_delete', {'id': id}) }}"> <button type="button" class="btn btn-danger col-md-12 col-xs-12">Usuń Produkt</button></a>
 

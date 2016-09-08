@@ -53,6 +53,7 @@ class login extends Controller
                 //$_SESSION['user'] = $user->getUser();
                 $session->set('lvl', $user->getLvl());
                 //$_SESSION['lvl'] = $user->getLvl();
+                $session->set('cart', 0);
                 dump($session);
                 return $this->redirectToRoute('startpage');
             }

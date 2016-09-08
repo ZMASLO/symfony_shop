@@ -7,8 +7,10 @@
  */
 
 namespace AppBundle\Controller;
+use AppBundle\Entity\AddUser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -49,6 +51,9 @@ class edituserdata extends Controller
                 'label' => 'Numer telefonu',
                 'data' => $number
             ])
+            ->add('avatar', FileType::class, [
+                'label' => 'Dodaj zdjęcie .jpg'
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Zapisz zmiany'
             ])
@@ -57,13 +62,22 @@ class edituserdata extends Controller
 
         $form->handleRequest($request);
         //jeśli jest poprawny to wysyłam zmianę do bazy
-        if($form->isValid()){
+        if($form->isValid() && $form->isSubmitted()){
             $user->setPassword($form->get('password')->getData());
             $user->setEmail($form->get('email')->getData());
             $user->setAddress($form->get('address')->getData());
             $user->setNumber($form->get('number')->getData());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
+
+
+            $avatar = $user->getAvatar();
+            $avatarname = $user->getUser().'.jpg';
+            $avatar->move(
+                $this->getParameter('avatar_directory'),
+                $avatarname
+            );
+            $user->setAvatar($avatarname);
             return $this->redirectToRoute('account');
         }
 

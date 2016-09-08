@@ -15,7 +15,7 @@ class product_single extends Controller
 {
     /**
      * @param $id
-     * @Route("/products/{id}")
+     * @Route("/products/{id}", name="product_single")
      */
     public function showProduct($id){
 
@@ -29,6 +29,7 @@ class product_single extends Controller
             'price' => $product->getPrice(),
             'old_price' => $product->getOldPrice()
         ]);
+
     }
 
 

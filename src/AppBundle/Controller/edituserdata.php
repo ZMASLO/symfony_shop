@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class edituserdata extends Controller
 {
@@ -25,7 +26,7 @@ class edituserdata extends Controller
     public function edituserdata(Request $request){
         $session = new Session();
         $repository = $this->getDoctrine()->getRepository('AppBundle:AddUser');
-        $user = $repository->findOneByUser($session->get('user'));
+        $user = $repository->find($session->get('id'));
         //pobieram dane z bazy aby wpisać je automatycznie w formularz
         $pass = $user->getPassword();
         $email = $user->getEmail();
@@ -52,7 +53,9 @@ class edituserdata extends Controller
                 'data' => $number
             ])
             ->add('avatar', FileType::class, [
-                'label' => 'Dodaj zdjęcie .jpg'
+                'label' => 'Dodaj zdjęcie .jpg',
+                'required' => false,
+                'empty_data' => NULL
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Zapisz zmiany'
@@ -67,17 +70,21 @@ class edituserdata extends Controller
             $user->setEmail($form->get('email')->getData());
             $user->setAddress($form->get('address')->getData());
             $user->setNumber($form->get('number')->getData());
+            $user->setAvatar($form->get('avatar')->getData());
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $photo */
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-
-            $avatar = $user->getAvatar();
-            $avatarname = $user->getUser().'.jpg';
-            $avatar->move(
-                $this->getParameter('avatar_directory'),
-                $avatarname
-            );
-            $user->setAvatar($avatarname);
+            if($form->isValid() && $form->get("avatar")->getData() != NULL) {
+                $avatar = $user->getAvatar();
+                $avatarname = $user->getUser() . '.jpg';
+                $avatar->move(
+                    $this->getParameter('avatar_directory'),
+                    $avatarname
+                );
+                $user->setAvatar($this->getParameter('avatar_directory').'/'.$avatarname);
+                $em->flush();
+            }
             return $this->redirectToRoute('account');
         }
 

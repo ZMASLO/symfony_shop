@@ -42,7 +42,7 @@ class login extends Controller
 
         if($form->isValid()){
             $repository = $this -> getDoctrine()->getRepository('AppBundle:AddUser');
-            $user = $repository->findOneByUser($form->get('user')->getData());
+            $user = $repository->findOneBy($form->get('user')->getData());
             dump($user->getPassword());
             $zalogowany = 0;
             if($user->getPassword()==$form->get('password')->getData()){
@@ -54,6 +54,7 @@ class login extends Controller
                 $session->set('lvl', $user->getLvl());
                 //$_SESSION['lvl'] = $user->getLvl();
                 $session->set('cart', 0);
+                $session->set('id', $user->getId());
                 dump($session);
                 return $this->redirectToRoute('startpage');
             }

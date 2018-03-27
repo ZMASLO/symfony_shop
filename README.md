@@ -5,4 +5,4 @@ Zrzuty ekranu nie są aktualne, zostały zrobione w którymś momencie gdy pisa�
 
 ![1](screenshots/1.png)
 
-![2](screenshors/2.png)
+![2](screenshots/2.png)
